@@ -8,7 +8,7 @@ const config = {
   CHANNEL_ID: "WEB",
   INDUSTRY: "Retail",
   WEBSITE: "WEBSTAGING",
-  CALLBACK_URL: "http://localhost:3005/apis/1", // webhook url for verifying payment
+  CALLBACK_URL: "https://esport-club-server.herokuapp.com/apis/1", // webhook url for verifying payment
 };
 
 exports.pay = function (req, res) {
