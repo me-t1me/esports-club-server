@@ -42,7 +42,7 @@ app.get(
 
     const googleSheets = google.sheets({ version: "v4", auth: client });
 
-    const spreadsheetId = "1KWAsYoJtUDjfbHd71Q1OiTJnt-QUJ6kmiJom4imR13I";
+    const spreadsheetId = process.env.SPREADSHEETID;
 
     await googleSheets.spreadsheets.values.append({
       auth,
