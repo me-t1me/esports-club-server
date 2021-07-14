@@ -9,19 +9,16 @@ const config = {
   CHANNEL_ID: "WEB",
   INDUSTRY: "Retail",
   WEBSITE: "WEBSTAGING",
-  CALLBACK_URL: `${process.env.URL}/apis/1`,
+  CALLBACK_URL: "https://esport-club-server.herokuapp.com/apis/1", // http://localhost:3005  https://esport-club-server.herokuapp.com
 };
 
 exports.pay = function (req, res) {
-  console.log(typeof process.env.MID, process.env.MID);
-
   let data = {
     TXN_AMOUNT: "10", // request amount
     ORDER_ID: uuidv4(), // any unique order id
     CUST_ID: "CUST_123456", // any unique customer id
   };
 
-  console.log("loading config");
   // create Paytm Payment
   paytm.createPayment(config, data, function (err, data) {
     if (err) {
