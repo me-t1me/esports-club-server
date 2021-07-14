@@ -5,6 +5,8 @@ const paytm = require("./paytm");
 const formidable = require("formidable");
 require("dotenv").config();
 
+const SPREADSHEETS_ID = process.env.SPREADSHEETS_ID;
+
 const app = express();
 app.use(cors());
 let status = "";
@@ -43,7 +45,7 @@ app.get(
 
     const googleSheets = google.sheets({ version: "v4", auth: client });
 
-    const spreadsheetId = "1KWAsYoJtUDjfbHd71Q1OiTJnt-QUJ6kmiJom4imR13I";
+    const spreadsheetId = SPREADSHEETS_ID;
 
     await googleSheets.spreadsheets.values.append({
       auth,
@@ -69,6 +71,8 @@ app.get(
   }
 );
 
-app.listen(process.env.PORT || 3005, (req, res) => {
+const PORT = process.env.PORT || 3005;
+
+app.listen(PORT, (req, res) => {
   console.log("listening on port 3005");
 });

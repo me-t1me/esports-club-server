@@ -2,14 +2,18 @@ const paytm = require("paytm-nodejs");
 const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
 
+const URL = process.env.URL;
+const MID = process.env.MID;
+const KEY = process.env.KEY;
+
 const config = {
-  MID: "YDpcLz24139316338208", // Get this from Paytm console
-  KEY: "O8wAE43MPwEkh65X", // Get this from Paytm console
+  MID: MID, // Get this from Paytm console
+  KEY: KEY, // Get this from Paytm console
   ENV: "dev", // 'dev' for development, 'prod' for production
   CHANNEL_ID: "WEB",
   INDUSTRY: "Retail",
   WEBSITE: "WEBSTAGING",
-  CALLBACK_URL: "https://esport-club-server.herokuapp.com/apis/1", // http://localhost:3005  https://esport-club-server.herokuapp.com
+  CALLBACK_URL: `${URL}/apis/1`, // http://localhost:3005  https://esport-club-server.herokuapp.com
 };
 
 exports.pay = function (req, res) {
