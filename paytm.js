@@ -3,8 +3,8 @@ const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
 
 const config = {
-  MID: process.env.MID, // Get this from Paytm console
-  KEY: process.env.KEY, // Get this from Paytm console
+  MID: "YDpcLz24139316338208", // Get this from Paytm console
+  KEY: "O8wAE43MPwEkh65X", // Get this from Paytm console
   ENV: "dev", // 'dev' for development, 'prod' for production
   CHANNEL_ID: "WEB",
   INDUSTRY: "Retail",
