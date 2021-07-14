@@ -10,6 +10,7 @@ app.use(cors());
 let status = "";
 
 app.get("/apis/pay", (req, res) => {
+  console.log("starting");
   paytm.pay(req, res);
 });
 

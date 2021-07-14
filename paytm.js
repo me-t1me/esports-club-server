@@ -13,12 +13,15 @@ const config = {
 };
 
 exports.pay = function (req, res) {
+  console.log(typeof process.env.MID, process.env.MID);
+
   let data = {
     TXN_AMOUNT: "10", // request amount
     ORDER_ID: uuidv4(), // any unique order id
     CUST_ID: "CUST_123456", // any unique customer id
   };
 
+  console.log("loading config");
   // create Paytm Payment
   paytm.createPayment(config, data, function (err, data) {
     if (err) {
