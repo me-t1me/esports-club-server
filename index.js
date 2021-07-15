@@ -22,12 +22,21 @@ app.post("/apis/1", (req, res) => {
   form.parse(req, (err, fields, files) => {
     status = fields.STATUS;
     if (status === "TXN_SUCCESS") {
-      res.redirect(`${CLIENT_URL}/success`);
+      res.redirect("/apis/success");
     } else {
       res.redirect(`${CLIENT_URL}/failure`);
     }
   });
 });
+
+app.get("/apis/success", (req, res) => {
+  res.redirect(`${CLIENT_URL}/success`);
+});
+
+app.get("/apis/failure", (req, res) => {
+  res.redirect(`${CLIENT_URL}/failure`);
+});
+
 app.get("/apis/2", (req, res) => {
   res.json({
     data: status,
