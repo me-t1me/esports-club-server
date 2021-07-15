@@ -7,12 +7,13 @@ require("dotenv").config();
 
 const SPREADSHEETS_ID = process.env.SPREADSHEETS_ID;
 
+const CLIENT_URL = process.env.CLIENT_URL;
+
 const app = express();
 app.use(cors());
 let status = "";
 
 app.get("/apis/pay", (req, res) => {
-  console.log("starting");
   paytm.pay(req, res);
 });
 
@@ -21,9 +22,9 @@ app.post("/apis/1", (req, res) => {
   form.parse(req, (err, fields, files) => {
     status = fields.STATUS;
     if (status === "TXN_SUCCESS") {
-      res.send("Payment successful");
+      res.redirect(`${CLIENT_URL}/success`);
     } else {
-      res.send("Payment failed");
+      res.redirect(`${CLIENT_URL}/failure`);
     }
   });
 });

@@ -13,7 +13,7 @@ const config = {
   CHANNEL_ID: "WEB",
   INDUSTRY: "Retail",
   WEBSITE: "WEBSTAGING",
-  CALLBACK_URL: `${URL}/apis/1`, // http://localhost:3005  https://esport-club-server.herokuapp.com
+  CALLBACK_URL: `${URL}/apis/1`,
 };
 
 exports.pay = function (req, res) {
