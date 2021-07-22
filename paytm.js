@@ -20,7 +20,7 @@ const config = {
 
 exports.pay = function (req, res) {
   let data = {
-    TXN_AMOUNT: "10", // request amount
+    TXN_AMOUNT: "20", // request amount
     ORDER_ID: uuidv4(), // any unique order id
     CUST_ID: "CUST_123456", // any unique customer id
   };
