@@ -6,6 +6,7 @@ const URL = process.env.URL;
 const MID = process.env.MID;
 const KEY = process.env.KEY;
 const CHANNEL_ID = process.env.CHANNEL_ID;
+const WEBSITE = process.env.WEBSITE;
 
 const config = {
   MID: MID, // Get this from Paytm console
@@ -13,7 +14,7 @@ const config = {
   ENV: CHANNEL_ID, // 'dev' for development, 'prod' for production
   CHANNEL_ID: "WEB",
   INDUSTRY: "Retail",
-  WEBSITE: "WEBSTAGING",
+  WEBSITE: WEBSITE,
   CALLBACK_URL: `${URL}/apis/1`,
 };
 
