@@ -5,11 +5,12 @@ require("dotenv").config();
 const URL = process.env.URL;
 const MID = process.env.MID;
 const KEY = process.env.KEY;
+const CHANNEL_ID = process.env.CHANNEL_ID;
 
 const config = {
   MID: MID, // Get this from Paytm console
   KEY: KEY, // Get this from Paytm console
-  ENV: "dev", // 'dev' for development, 'prod' for production
+  ENV: CHANNEL_ID, // 'dev' for development, 'prod' for production
   CHANNEL_ID: "WEB",
   INDUSTRY: "Retail",
   WEBSITE: "WEBSTAGING",
