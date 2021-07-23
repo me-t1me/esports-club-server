@@ -1,40 +1,60 @@
 const express = require("express");
 const { google } = require("googleapis");
 const cors = require("cors");
-const paytm = require("./paytm");
-const formidable = require("formidable");
+const Razorpay = require("razorpay");
+const { v4: uuidv4 } = require("uuid");
+const bodyParser = require("body-parser");
 require("dotenv").config();
 
 const SPREADSHEETS_ID = process.env.SPREADSHEETS_ID;
 
-const CLIENT_URL = process.env.CLIENT_URL;
+const MID = process.env.MID;
+const KEY = process.env.KEY;
+
+const razorpay = new Razorpay({
+  key_id: MID,
+  key_secret: KEY,
+});
 
 const app = express();
 app.use(cors());
-let status = "";
+app.use(bodyParser.json());
+let status = "not successful";
 
-app.get("/apis/pay", (req, res) => {
-  paytm.pay(req, res);
-});
+app.post("/apis/pay", async (req, res) => {
+  const amount = 20;
+  const currency = "INR";
 
-app.post("/apis/1", (req, res) => {
-  const form = new formidable.IncomingForm();
-  form.parse(req, (err, fields, files) => {
-    status = fields.STATUS;
-    if (status === "TXN_SUCCESS") {
-      res.redirect("/apis/success");
-    } else {
-      res.redirect(`${CLIENT_URL}/failure`);
-    }
+  const options = {
+    amount: amount * 100,
+    currency,
+    receipt: uuidv4(),
+  };
+
+  const response = await razorpay.orders.create(options);
+  res.json({
+    id: response.id,
+    currency: response.currency,
+    amount: response.amount,
   });
 });
 
-app.get("/apis/success", (req, res) => {
-  res.redirect(`${CLIENT_URL}/success`);
-});
+app.post("/apis/1", (req, res) => {
+  const secret = "12345678";
 
-app.get("/apis/failure", (req, res) => {
-  res.redirect(`${CLIENT_URL}/failure`);
+  const crypto = require("crypto");
+
+  const shasum = crypto.createHmac("sha256", secret);
+  shasum.update(JSON.stringify(req.body));
+  const digest = shasum.digest("hex");
+
+  if (digest === req.headers["x-razorpay-signature"]) {
+    status = req.body.payload.payment.entity.status;
+    console.log(status);
+  } else {
+    // pass it
+  }
+  res.status(200);
 });
 
 app.get("/apis/2", (req, res) => {
