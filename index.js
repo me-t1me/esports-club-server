@@ -10,6 +10,8 @@ const SPREADSHEETS_ID = process.env.SPREADSHEETS_ID;
 
 const MID = process.env.MID;
 const KEY = process.env.KEY;
+const FEE = process.env.FEE;
+const CLIENT_URL = process.env.CLIENT_URL;
 
 const razorpay = new Razorpay({
   key_id: MID,
@@ -22,7 +24,7 @@ app.use(bodyParser.json());
 let status = "not successful";
 
 app.post("/apis/pay", async (req, res) => {
-  const amount = 20;
+  const amount = FEE;
   const currency = "INR";
 
   const options = {
@@ -54,6 +56,7 @@ app.post("/apis/1", (req, res) => {
   } else {
     // pass it
   }
+
   res.status(200);
 });
 
