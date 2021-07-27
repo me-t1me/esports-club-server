@@ -67,7 +67,7 @@ app.get("/apis/2", (req, res) => {
 });
 
 app.get(
-  "/apis/:name/:mobile/:riot/:crank/:hrank/:status/:time",
+  "/apis/:name/:mobile/:riot/:crank/:hrank/:status/:time/:id/:email",
   async (req, res) => {
     const auth = new google.auth.GoogleAuth({
       keyFile: "credentials.json",
@@ -95,6 +95,8 @@ app.get(
             req.params.hrank,
             req.params.status,
             req.params.time,
+            req.params.id,
+            req.params.email,
           ],
         ],
       },
